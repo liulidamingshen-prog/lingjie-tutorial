@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>灵界修仙·新手教程</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f5f0e6;--card:#fffcf5;--pri:#2d6a4f;--pri-l:#52b788;--acc:#c08552;--acc-l:#ddb892;--txt:#3a3228;--gray:#8a8275;--red:#c1432e;--radius:12px;--shadow:0 2px 12px rgba(100,80,40,.1)}
+body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--txt);line-height:1.85;font-size:15px}
+a{color:var(--pri);text-decoration:none}
+/* Header */
+.header{background:linear-gradient(135deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%);padding:20px 16px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.header::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5L35 25L55 30L35 35L30 55L25 35L5 30L25 25Z' fill='%23ffffff' opacity='0.04'/%3E%3C/svg%3E")}
+.header h1{font-size:22px;margin-bottom:12px;letter-spacing:3px;position:relative}
+.codes{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;margin-bottom:8px}
+.code-card{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:8px 16px;font-size:15px;backdrop-filter:blur(4px)}
+.code-card .label{opacity:.85}
+.code-card .code{font-weight:bold;font-size:17px;letter-spacing:2px;color:#fde68a;font-family:monospace}
+.code-note{font-size:13px;opacity:.8;position:relative}
+.open-notice{background:#fff8ec;border:1px solid var(--acc-l);border-radius:8px;padding:10px 16px;margin:20px auto;max-width:560px;text-align:center;font-size:14px;color:var(--acc)}
+.open-notice strong{color:var(--red)}
+/* Nav - book style TOC */
+.toc{background:var(--card);border:1px solid #e0d8c8;border-radius:var(--radius);padding:28px 20px;margin:24px auto;max-width:460px;box-shadow:var(--shadow);text-align:center}
+.toc-title{font-size:20px;font-weight:bold;color:var(--pri);margin-bottom:18px;letter-spacing:8px;border-bottom:2px solid var(--acc-l);padding-bottom:12px}
+.toc a{display:block;font-size:18px;color:var(--txt);padding:14px 8px;border-bottom:1px dashed #e0d8c8;transition:.2s;letter-spacing:2px}
+.toc a:last-child{border-bottom:none}
+.toc a:hover{color:var(--pri);background:rgba(82,183,136,.06)}
+.toc a .toc-num{display:inline-block;width:30px;height:30px;line-height:30px;border-radius:50%;background:var(--pri);color:#fff;font-size:15px;margin-right:10px;text-align:center;vertical-align:middle}
+/* Main */
+main{max-width:780px;margin:0 auto;padding:24px 16px 60px}
+.chapter{margin-bottom:48px;scroll-margin-top:20px}
+.ch-title{font-size:22px;font-weight:bold;color:var(--pri);border-left:5px solid var(--acc);padding-left:14px;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.ch-title .num{background:var(--pri);color:#fff;width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sub-title{font-size:17px;font-weight:bold;color:var(--acc);margin:24px 0 10px;padding-bottom:6px;border-bottom:1px dashed var(--acc-l)}
+p{margin-bottom:10px}
+.tip{background:#f0f7f4;border-left:4px solid var(--pri-l);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:14px}
+.warn{background:#fef3f0;border-left:4px solid var(--red);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:14px}
+.key{background:#fff8ec;border:1px solid var(--acc-l);border-radius:8px;padding:14px 16px;margin:14px 0}
+.key strong{color:var(--acc)}
+ul,ol{padding-left:22px;margin-bottom:12px}
+li{margin-bottom:5px}
+.tag{display:inline-block;background:var(--pri);color:#fff;padding:1px 8px;border-radius:4px;font-size:12px;margin:0 2px}
+.tag.gold{background:var(--acc)}
+.tag.red{background:var(--red)}
+/* Diagram common */
+.dia{background:var(--card);border:1px solid #e8e0d0;border-radius:var(--radius);padding:18px;margin:16px 0;box-shadow:var(--shadow)}
+.dia-title{text-align:center;font-size:13px;color:var(--gray);margin-bottom:12px}
+/* Reincarnation flow */
+.flow{display:flex;flex-direction:column;gap:0;align-items:center}
+.flow-step{display:flex;align-items:flex-start;gap:12px;width:100%;max-width:520px}
+.flow-num{width:28px;height:28px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px;z-index:2;position:relative}
+.flow-content{background:#f8f5ee;border-radius:8px;padding:10px 14px;flex:1;margin-bottom:12px;border:1px solid #e0d8c8}
+.flow-content strong{color:var(--pri)}
+.flow-line{width:2px;height:12px;background:var(--pri-l);margin-left:13px;margin-top:-12px;margin-bottom:0;position:relative;z-index:1}
+/* Toolbar mockup */
+.toolbar{display:flex;align-items:center;gap:6px;justify-content:center;flex-wrap:wrap;padding:14px;background:#ede8db;border-radius:8px}
+.tb-btn{padding:6px 12px;border-radius:20px;font-size:13px;background:#d5cdb8;color:var(--gray);border:1px solid #c8bea8}
+.tb-btn.active{background:var(--pri);color:#fff}
+.tb-btn.hl{background:#fff3cd;border:2px solid var(--red);color:var(--red);font-weight:bold}
+.tb-toggle{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;background:#d5cdb8;font-size:13px}
+.tb-toggle.hl{background:#fff3cd;border:2px solid var(--red);color:var(--red);font-weight:bold}
+/* Settings mockup */
+.settings-card{background:#faf7ef;border-radius:10px;padding:16px;border:1px solid #e0d8c8}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee5d5;font-size:14px}
+.settings-row:last-child{border-bottom:none}
+.settings-row .num{width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-right:8px}
+.settings-row .label{display:flex;align-items:center;flex:1}
+.settings-row .val{font-weight:bold;color:var(--pri)}
+.settings-row .val.red{color:var(--red)}
+/* Grid cards */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.gcard{background:#f8f5ee;border:1px solid #e0d8c8;border-radius:8px;padding:12px;text-align:center;font-size:13px}
+.gcard .icon{font-size:24px;margin-bottom:6px}
+.gcard .name{font-weight:bold;color:var(--pri);margin-bottom:4px}
+.gcard .desc{font-size:12px;color:var(--gray)}
+@media(max-width:560px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
+/* SVG map */
+.map-svg{width:100%;max-width:600px;margin:0 auto;display:block}
+/* Equip slots */
+.equip-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:360px;margin:14px auto}
+.equip-slot{background:linear-gradient(135deg,#f8f5ee,#ede8db);border:2px solid var(--acc-l);border-radius:10px;padding:14px;text-align:center}
+.equip-slot .es-name{font-weight:bold;color:var(--acc);font-size:15px}
+.equip-slot .es-desc{font-size:12px;color:var(--gray);margin-top:4px}
+/* Inscription flow */
+.ins-flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.ins-step{background:var(--pri);color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;text-align:center}
+.ins-arrow{color:var(--acc);font-size:20px}
+/* Spirit vein card */
+.sv-card{background:linear-gradient(135deg,#f8f5ee,#f0ebd8);border:1px solid var(--acc-l);border-radius:10px;padding:16px;max-width:420px;margin:14px auto}
+.sv-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee5d5;font-size:14px}
+.sv-row:last-child{border-bottom:none}
+.sv-bonus{color:var(--pri-l);font-weight:bold;font-size:18px}
+/* Toggle mockup */
+.toggle-mock{display:inline-block;width:44px;height:24px;border-radius:12px;background:var(--pri-l);position:relative;vertical-align:middle}
+.toggle-mock::after{content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;top:2px;right:2px;transition:.2s}
+/* Footer */
+.footer{text-align:center;padding:24px 16px;color:var(--gray);font-size:13px;border-top:1px solid #e0d8c8}
+/* Anchor offset */
+section{scroll-margin-top:52px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>灵界修仙 · 新手引路</h1>
+  <div class="codes">
+    <div class="code-card"><span class="label">【荒-天-帝】接引码：</span><span class="code" id="c1">Z5RJUM</span></div>
+    <div class="code-card"><span class="label">【清漪澄】接引码：</span><span class="code" id="c2">QDU5SA</span></div>
+  </div>
+  <p class="code-note">任选其一填入即可 · 我们是完美世界荒天帝一脉</p>
+</div>
+
+<div class="open-notice">如QQ打开本页面，请点击右上方<strong>「···」</strong>三个点，选择<strong>「浏览器打开」</strong>，效果更佳</div>
+
+<nav class="toc" id="toc">
+  <div class="toc-title">目 录</div>
+  <a href="#ch1"><span class="toc-num">一</span>开局：灵根选择</a>
+  <a href="#ch2"><span class="toc-num">二</span>探索：提升修为</a>
+  <a href="#ch3"><span class="toc-num">三</span>神识：快速恢复</a>
+  <a href="#ch4"><span class="toc-num">四</span>装备：神识为主</a>
+  <a href="#ch5"><span class="toc-num">五</span>仙缘获取：修为提升利器</a>
+</nav>
+
+<main>
+
+<!-- ==================== 第一章 ==================== -->
+<section class="chapter" id="ch1">
+  <div class="ch-title"><span class="num">一</span>开局：灵根选择</div>
+
+  <div class="sub-title">注册与接引码</div>
+  <p>注册时<strong>不要用 Tap 一键登录</strong>，App 端用<strong>邮箱注册</strong>会自动绑定 Tap。注册时填入接引码，可获仙缘奖励。若漏填，半小时内仍可补填，能得 <strong>30 仙缘</strong>。</p>
+  <div class="tip"><strong>仙缘用途：</strong>高级冥想（瞬间回复 2 小时神识）、洗练技能词条数值、开通月卡（享自动冥想、自动切换天赋等便利）。前期非常珍贵，不要乱花。</div>
+  <p>注册后可在排行榜搜索<strong>【荒-天-帝】</strong>或<strong>【清漪澄】</strong>拜师，或拜其他高境界玩家为师，师傅会提供起步灵石、装备和丹药。</p>
+
+  <div class="sub-title">为什么要刷天灵根</div>
+  <p>灵根分多种品级，<strong>天灵根</strong>是新人唯一推荐的选择：</p>
+  <ul>
+    <li><span class="tag">+20%</span> 冥想效率加成 — 神识恢复更快</li>
+    <li><span class="tag gold">修炼加成</span> 整体修为提升速度更快</li>
+    <li>前期资源有限，天灵根能最大化效率</li>
+  </ul>
+  <p>开局先跟着主线任务走，到「觉醒灵根」环节，查看觉醒结果是否为天灵根。<strong>如果不是，不要急着探索</strong>，先用「轮回」功能重刷。</p>
+
+  <div class="sub-title">轮回刷天灵根 — 六步流程</div>
+  <div class="dia">
+    <div class="dia-title">轮回操作流程示意图</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-content">点左上角<strong>角色头像</strong>，拉到页面最底部，找到<strong>「轮回」</strong>按钮并点击</div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-content">进入<strong>护道匣保留</strong>界面 → 新手无需选保留物品 → 直接点击底部<strong>「转世重修」</strong></div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-content">弹出确认窗口，阅读提示后点击<strong>「我已知晓」</strong></div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-content">最后确认：在输入框中输入<strong>「转世重修」</strong>四个字 → 点击<strong>「确定」</strong></div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><div class="flow-num">5</div><div class="flow-content">轮回完成后，回到角色界面，点击灵根位置的<strong>「觉醒」</strong>按钮，随机觉醒一种命格</div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><div class="flow-num">6</div><div class="flow-content">查看觉醒结果 — 是<strong>天灵根</strong>则完成开局；不是则从第 1 步重新开始</div></div>
+    </div>
+  </div>
+  <div class="tip"><strong>操作要点：</strong>一轮只需点五下就能看到觉醒成果，非常简洁。轮回不需要重启游戏、不需要重新注册，随时可以操作。</div>
+  <div class="warn"><strong>切勿混淆「原地坐化」与「轮回」！</strong>原地坐化会<strong>清除账号</strong>，重新坐化后用原邮箱登记接引码将<strong>无效</strong>。轮回只是重置灵根，不影响账号。</div>
+</section>
+
+<!-- ==================== 第二章 ==================== -->
+<section class="chapter" id="ch2">
+  <div class="ch-title"><span class="num">二</span>探索：提升修为</div>
+
+  <div class="sub-title">游戏核心逻辑</div>
+  <p>灵界的核心循环非常简单：<strong>探索 → 获得修为经验 → 突破境界 → 去更高级地图 → 继续探索</strong>。探索需要消耗<strong>神识</strong>（相当于体力），神识耗尽后需冥想恢复。</p>
+
+  <div class="sub-title">境界体系</div>
+  <div class="dia">
+    <div class="dia-title">修仙境界进阶路线</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap">
+      <span class="tag" style="font-size:13px;padding:4px 10px">锻体</span><span style="color:var(--acc)">→</span>
+      <span class="tag" style="font-size:13px;padding:4px 10px">炼气</span><span style="color:var(--acc)">→</span>
+      <span class="tag" style="font-size:13px;padding:4px 10px">筑基</span><span style="color:var(--acc)">→</span>
+      <span class="tag" style="font-size:13px;padding:4px 10px">结丹</span><span style="color:var(--acc)">→</span>
+      <span class="tag" style="font-size:13px;padding:4px 10px">元婴</span><span style="color:var(--acc)">→</span>
+      <span class="tag" style="font-size:13px;padding:4px 10px">炼虚</span><span style="color:var(--acc)">→</span>
+      <span class="tag" style="font-size:13px;padding:4px 10px">合道</span><span style="color:var(--acc)">→</span>
+      <span class="tag" style="font-size:13px;padding:4px 10px">大乘</span><span style="color:var(--acc)">→</span>
+      <span class="tag" style="font-size:13px;padding:4px 10px">渡劫</span>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--gray);margin-top:8px">每个大境界分为前期、中期、后期、大圆满四个小阶段</p>
+  </div>
+
+  <div class="sub-title">跨境界探索策略</div>
+  <p>核心技巧：<strong>去比自己当前境界高一个大境界的地图探索</strong>，修为收益远超同级地图。配合护道代打，自己不会有任何风险。</p>
+  <div class="dia">
+    <div class="dia-title">跨境界探索示意图</div>
+    <svg class="map-svg" viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg">
+      <!-- Connections -->
+      <line x1="90" y1="70" x2="200" y2="70" stroke="#b8d4c8" stroke-width="2" stroke-dasharray="5,4"/>
+      <line x1="200" y1="70" x2="360" y2="70" stroke="#c1432e" stroke-width="2.5" stroke-dasharray="5,4"/>
+      <line x1="90" y1="170" x2="200" y2="170" stroke="#b8d4c8" stroke-width="2" stroke-dasharray="5,4"/>
+      <line x1="200" y1="170" x2="360" y2="170" stroke="#c1432e" stroke-width="2.5" stroke-dasharray="5,4"/>
+      <line x1="360" y1="70" x2="470" y2="70" stroke="#b8d4c8" stroke-width="2" stroke-dasharray="5,4"/>
+      <line x1="360" y1="170" x2="470" y2="170" stroke="#b8d4c8" stroke-width="2" stroke-dasharray="5,4"/>
+      <!-- Current realm box -->
+      <rect x="30" y="145" width="120" height="50" rx="10" fill="#e8f5e9" stroke="#52b788" stroke-width="2"/>
+      <text x="90" y="168" text-anchor="middle" font-size="13" fill="#2d6a4f" font-weight="bold">炼气期</text>
+      <text x="90" y="184" text-anchor="middle" font-size="11" fill="#8a8275">你的当前境界</text>
+      <!-- Recommended target -->
+      <rect x="310" y="145" width="120" height="50" rx="10" fill="#fff3cd" stroke="#c1432e" stroke-width="2.5"/>
+      <text x="370" y="168" text-anchor="middle" font-size="13" fill="#c1432e" font-weight="bold">雾隐村</text>
+      <text x="370" y="184" text-anchor="middle" font-size="11" fill="#c1432e">筑基大圆满地图 ←推荐</text>
+      <!-- Normal target -->
+      <rect x="310" y="45" width="120" height="50" rx="10" fill="#f5f5f0" stroke="#c8bea8" stroke-width="1.5"/>
+      <text x="370" y="68" text-anchor="middle" font-size="13" fill="#8a8275">青松林</text>
+      <text x="370" y="84" text-anchor="middle" font-size="11" fill="#8a8275">同级地图（修为低）</text>
+      <!-- Second example -->
+      <rect x="30" y="45" width="120" height="50" rx="10" fill="#e8f5e9" stroke="#52b788" stroke-width="2"/>
+      <text x="90" y="68" text-anchor="middle" font-size="13" fill="#2d6a4f" font-weight="bold">筑基期</text>
+      <text x="90" y="84" text-anchor="middle" font-size="11" fill="#8a8275">进阶后</text>
+      <rect x="420" y="45" width="120" height="50" rx="10" fill="#fff3cd" stroke="#c1432e" stroke-width="2"/>
+      <text x="480" y="68" text-anchor="middle" font-size="13" fill="#c1432e" font-weight="bold">古道废墟</text>
+      <text x="480" y="84" text-anchor="middle" font-size="11" fill="#c1432e">金丹大圆满 ←推荐</text>
+      <!-- Arrow labels -->
+      <text x="280" y="62" text-anchor="middle" font-size="10" fill="#c1432e">跨级↑高收益</text>
+      <text x="280" y="162" text-anchor="middle" font-size="10" fill="#c1432e">跨级↑高收益</text>
+      <text x="280" y="135" text-anchor="middle" font-size="10" fill="#8a8275">同级·低收益</text>
+      <text x="280" y="222" text-anchor="middle" font-size="10" fill="#8a8275">同级·低收益</text>
+    </svg>
+    <p style="text-align:center;font-size:13px;color:var(--gray);margin-top:8px">红色虚线 = 推荐的跨级路线 · 绿色框 = 你的境界 · 黄框 = 推荐目标地图</p>
+  </div>
+
+  <div class="sub-title">自动探索设置</div>
+  <p>合体期之前，始终使用<strong>×1 倍率</strong>探索（高倍率没有护道保护，容易死）。配合自动模式，可以挂机刷修为。</p>
+  <div class="dia">
+    <div class="dia-title">探索工具栏示意</div>
+    <div class="toolbar">
+      <span class="tb-btn">冥想修炼</span>
+      <span class="tb-btn">探索（-128神识）</span>
+      <span class="tb-btn hl">×1</span>
+      <span class="tb-toggle hl">自动 ●</span>
+      <span class="tb-btn">储物</span>
+      <span class="tb-btn">炼造</span>
+      <span class="tb-btn">洞府</span>
+      <span class="tb-btn">功法</span>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:8px">红框标注的「×1」和「自动」是必开项 · 探索每次约消耗 128 神识</p>
+  </div>
+
+  <div class="sub-title">护道设置（核心安全配置）</div>
+  <p>护道是大能代你战斗，<strong>代战模式下自己无消耗、不会死</strong>。设置好护道后可安心挂机。</p>
+  <div class="dia">
+    <div class="dia-title">护道设置面板示意</div>
+    <div class="settings-card">
+      <div class="settings-row"><div class="label"><span class="num">1</span>境界上限</div><div class="val">锻体期一重</div></div>
+      <div class="settings-row"><div class="label"><span class="num">2</span>战力倍率上限</div><div class="val red">0.1 倍</div></div>
+      <div class="settings-row"><div class="label"><span class="num">3</span>自动雇护道</div><div class="val">已开启</div></div>
+      <div class="settings-row"><div class="label"><span class="num">4</span>最高雇佣费</div><div class="val">1 灵石</div></div>
+      <div class="settings-row"><div class="label"><span class="num">5</span>普通护道模式</div><div class="val">单独代战</div></div>
+      <div class="settings-row"><div class="label"><span class="num">6</span>护道来源</div><div class="val">仅选「普通护道」</div></div>
+      <div class="settings-row"><div class="label"><span class="num">7</span>保存战斗</div><div class="val red">记得保存！</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--gray);margin-top:8px;text-align:center">战力倍率设 0.1 最安全 · 最高雇佣费 1 灵石防破产 · 模式选「单独代战」自己零消耗</p>
+  </div>
+  <div class="warn"><strong>最高雇佣费切忌设为 0！</strong>设为 0 表示无上限，遇到收费护道会瞬间清空灵石。设 1 灵石即可，后期可按需调高。</div>
+
+  <div class="sub-title">丹药与增益</div>
+  <div class="grid3">
+    <div class="gcard"><div class="icon">💊</div><div class="name">虚空淬体丹</div><div class="desc">锻体期吃满10颗<br>增加探索经验值</div></div>
+    <div class="gcard"><div class="icon">💊</div><div class="name">清心丹</div><div class="desc">炼气期吃满50颗<br>提升修炼效率</div></div>
+    <div class="gcard"><div class="icon">💊</div><div class="name">万妖令</div><div class="desc">炼气后服用<br>探索增益</div></div>
+    <div class="gcard"><div class="icon">💊</div><div class="name">破境丹</div><div class="desc">突破境界备用<br>提高突破成功率</div></div>
+    <div class="gcard"><div class="icon">💊</div><div class="name">天命丹</div><div class="desc">突破境界备用<br>保驾护航</div></div>
+    <div class="gcard"><div class="icon">🌙</div><div class="name">夜晚加成</div><div class="desc">游戏内夜晚探索<br>+15% 经验加成</div></div>
+  </div>
+
+  <div class="sub-title">云游商人</div>
+  <p>自动探索途中会随机遇到云游商人，以下物品<strong>看到必买</strong>（实际价值远超售价）：</p>
+  <div class="grid3">
+    <div class="gcard"><div class="icon">📜</div><div class="name">空白卷轴</div><div class="desc">自创技能必备<br>价值上亿</div></div>
+    <div class="gcard"><div class="icon">💎</div><div class="name">洗练石</div><div class="desc">洗练词条数值<br>价值上亿</div></div>
+    <div class="gcard"><div class="icon">⏳</div><div class="name">延寿丹</div><div class="desc">增加寿元<br>后期刚需</div></div>
+  </div>
+
+  <div class="sub-title">突破与秘境</div>
+  <ul>
+    <li>修为满了<strong>及时突破</strong>，突破后立刻换更高级地图，升级更快</li>
+    <li>突破前<strong>清空秘境次数</strong> — 突破后低境界秘境无法再进</li>
+    <li>秘境中点「创建队伍」→「请护道者」，师傅化身护道最佳（加道韵）</li>
+    <li>高等级秘境打不过可加两个护道，两个必过</li>
+    <li>化神后有化身，可炼丹炼器制符（记得不勾选消耗本体神识）</li>
+  </ul>
+</section>
+
+<!-- ==================== 第三章 ==================== -->
+<section class="chapter" id="ch3">
+  <div class="ch-title"><span class="num">三</span>神识：快速恢复</div>
+
+  <div class="sub-title">神识 = 你的体力</div>
+  <p>神识是探索、战斗等一切操作的燃料。<strong>没有神识，就无法探索</strong>。快速恢复神识是高效升级的关键 — 有神识才有行动力。</p>
+
+  <div class="sub-title">神识恢复途径一览</div>
+  <div class="dia">
+    <div class="dia-title">神识恢复方式总览</div>
+    <div class="grid2">
+      <div class="gcard"><div class="icon">🧘</div><div class="name">基础冥想</div><div class="desc">神识耗尽后点击冥想<br>按时间恢复，免费</div></div>
+      <div class="gcard"><div class="icon">⭐</div><div class="name">高级冥想</div><div class="desc">花1仙缘瞬间回复<br>≈2小时冥想量</div></div>
+      <div class="gcard"><div class="icon">💍</div><div class="name">神识装备</div><div class="desc">铭刻神识铭文的装备<br>提升神识上限与回复</div></div>
+      <div class="gcard"><div class="icon">💕</div><div class="name">道侣双人入定</div><div class="desc">与异性结为道侣<br>双人冥想效率更高</div></div>
+      <div class="gcard"><div class="icon">🏯</div><div class="name">宗门镇派功法</div><div class="desc">换上宗门冥想功法<br>冥想效率额外提升</div></div>
+      <div class="gcard"><div class="icon">🌟</div><div class="name">天灵根加成</div><div class="desc">天灵根冥想效率<br>+20%</div></div>
+      <div class="gcard"><div class="icon">🏰</div><div class="name">宗门驻地灵脉</div><div class="desc">在驻地冥想<br>+22% 修为加成</div></div>
+      <div class="gcard"><div class="icon">💊</div><div class="name">神识丹药</div><div class="desc">每天限5颗<br>应急快速回复</div></div>
+    </div>
+  </div>
+
+  <div class="sub-title">冥想注意事项</div>
+  <div class="warn"><strong>高级冥想前务必检查神识上限！</strong>确保神识达到 <strong>3900+</strong>（检查装备是否穿好、洞府是否升满）。没穿装备只能回复十几点，严重浪费仙缘。一次高级冥想可恢复近 2000 点神识。</div>
+  <p>冥想前记得把功法<strong>换到宗门镇派冥想功法</strong>，可进一步提升效率。</p>
+
+  <div class="sub-title">宗门驻地灵脉加成</div>
+  <p>加入<strong>猫猫小窝</strong>宗门后，宗门驻地在<strong>长生大荒</strong>，灵脉可达 Lv.5，冥想修为<strong>+22%</strong>。</p>
+  <div class="dia">
+    <div class="dia-title">宗门灵脉面板示意</div>
+    <div class="sv-card">
+      <div class="sv-row"><span>灵脉名称</span><span><strong>天河灵脉</strong> Lv.5</span></div>
+      <div class="sv-row"><span>驻地</span><span>长生大荒</span></div>
+      <div class="sv-row"><span>冥想修为</span><span class="sv-bonus">+22%</span></div>
+      <div class="sv-row"><span>状态</span><span style="color:var(--gray)">需在驻地范围内生效</span></div>
+      <div class="sv-row"><span>说明</span><span style="font-size:12px;color:var(--gray)">仅驻地范围内冥想有效<br>探索/战斗/丹药不享受</span></div>
+    </div>
+  </div>
+
+  <div class="sub-title">洞府阵法</div>
+  <ul>
+    <li>炼气期后开启洞府，所有功能<strong>升到最高</strong></li>
+    <li>优先升级<strong>第二个冥想阵法</strong> — 直接提升冥想恢复量</li>
+    <li>洞府等级影响神识上限和冥想效率</li>
+  </ul>
+
+  <div class="sub-title">月卡自动冥想</div>
+  <p>开通月卡后解锁<strong>静止自动冥想</strong>功能，角色静止达到设定时间后自动开始冥想，无需手动操作。</p>
+  <div class="dia">
+    <div class="dia-title">自动冥想设置面板示意</div>
+    <div class="settings-card" style="max-width:380px;margin:0 auto">
+      <div class="settings-row"><div class="label">功能</div><div class="val">静止自动冥想</div></div>
+      <div class="settings-row"><div class="label">启用</div><div class="val"><span class="toggle-mock"></span> 已开启</div></div>
+      <div class="settings-row"><div class="label">静止时长</div><div class="val">3 分钟</div></div>
+      <div class="settings-row"><div class="label">说明</div><div class="val" style="font-size:12px;font-weight:normal;color:var(--gray)">探索/战斗会重置计时<br>收功需手动点击</div></div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:8px">月卡专属功能 · 挂机时自动恢复神识，非常便利</p>
+  </div>
+
+  <div class="sub-title">时间加成</div>
+  <div class="key">
+    <p><strong>🌅 夏季高级冥想：</strong>游戏内夏季（约 9:50 ~ 15:40）使用高级冥想有额外修为加成，尽量在这个时段用高级冥想。</p>
+    <p style="margin-top:8px"><strong>🌙 夜晚探索：</strong>游戏内夜晚探索有 <strong>15% 经验加成</strong>，尽量把探索安排在夜晚。</p>
+  </div>
+
+  <div class="sub-title">长生大荒 — 炼虚期必去之地</div>
+  <p>猫猫小窝的宗门驻地在<strong>长生大荒</strong>，炼虚期才能前往。<strong>一到炼虚务必立刻来这里冥想、探索升级</strong>，效率远超其他地图。</p>
+  <div class="dia">
+    <div class="dia-title">长生大荒区域路线示意</div>
+    <svg class="map-svg" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+      <!-- Path lines -->
+      <path d="M 100 230 Q 150 200 200 150 Q 250 120 300 100 Q 350 80 400 50" fill="none" stroke="#b8d4c8" stroke-width="2.5" stroke-dasharray="6,4"/>
+      <!-- Node 1: 入口 -->
+      <rect x="40" y="210" width="130" height="52" rx="10" fill="#e8f5e9" stroke="#52b788" stroke-width="2"/>
+      <text x="105" y="232" text-anchor="middle" font-size="13" fill="#2d6a4f" font-weight="bold">枯木长城</text>
+      <text x="105" y="250" text-anchor="middle" font-size="10" fill="#8a8275">炼虚前期~合道前期</text>
+      <text x="105" y="200" text-anchor="middle" font-size="10" fill="#c08552">入口·传送</text>
+      <!-- Node 2 -->
+      <rect x="170" y="130" width="130" height="52" rx="10" fill="#f8f5ee" stroke="#c8bea8" stroke-width="1.5"/>
+      <text x="235" y="152" text-anchor="middle" font-size="13" fill="#3a3228" font-weight="bold">极寒时间废墟</text>
+      <text x="235" y="170" text-anchor="middle" font-size="10" fill="#8a8275">炼虚大圆满~合道大圆满</text>
+      <!-- Node 3 -->
+      <rect x="140" y="55" width="130" height="52" rx="10" fill="#f8f5ee" stroke="#c8bea8" stroke-width="1.5"/>
+      <text x="205" y="77" text-anchor="middle" font-size="13" fill="#3a3228" font-weight="bold">建木遗树</text>
+      <text x="205" y="95" text-anchor="middle" font-size="10" fill="#8a8275">合道中期~大乘中期</text>
+      <!-- Node 4: 终点 -->
+      <rect x="300" y="25" width="130" height="52" rx="10" fill="#fff3cd" stroke="#c1432e" stroke-width="2.5"/>
+      <text x="365" y="47" text-anchor="middle" font-size="13" fill="#c1432e" font-weight="bold">寿华秘境</text>
+      <text x="365" y="65" text-anchor="middle" font-size="10" fill="#c1432e">大乘期~大圆满</text>
+      <!-- Arrows -->
+      <polygon points="165,195 172,200 165,205" fill="#c08552"/>
+      <polygon points="255,120 262,125 255,130" fill="#c08552"/>
+      <polygon points="295,55 302,50 295,45" fill="#c1432e"/>
+      <text x="250" y="270" text-anchor="middle" font-size="11" fill="#8a8275">沿路线逐步进阶 · 红框为终极目标</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ==================== 第四章 ==================== -->
+<section class="chapter" id="ch4">
+  <div class="ch-title"><span class="num">四</span>装备：神识为主</div>
+
+  <div class="sub-title">装备核心原则</div>
+  <div class="key"><strong>前期一切以神识为主！</strong>你只需要考虑神识，不需要考虑战力 — 因为有护道代打，战力无关紧要。一套锻体期神识装备可以直接用到化神甚至合道。</div>
+
+  <div class="sub-title">装备四件套</div>
+  <div class="dia">
+    <div class="dia-title">装备部位示意</div>
+    <div class="equip-grid">
+      <div class="equip-slot"><div class="es-name">⚔️ 剑</div><div class="es-desc">主手武器<br>选神识铭文</div></div>
+      <div class="equip-slot"><div class="es-name">🧥 衣服</div><div class="es-desc">防具<br>选神识铭文</div></div>
+      <div class="equip-slot"><div class="es-name">🔮 法器</div><div class="es-desc">辅助装备<br>选神识铭文</div></div>
+      <div class="equip-slot"><div class="es-name">💍 戒指</div><div class="es-desc">饰品<br>选神识铭文</div></div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--gray);margin-top:8px">每件装备选带<strong style="color:var(--pri)">5个神识铭纹</strong>的 · 四件套凑齐后神识上限可达 2900+</p>
+  </div>
+
+  <div class="sub-title">神识目标值</div>
+  <div class="grid2">
+    <div class="gcard" style="border:2px solid var(--pri-l)"><div class="icon">🔋</div><div class="name">锻体期</div><div class="desc" style="font-size:18px;color:var(--pri);font-weight:bold">2900+</div></div>
+    <div class="gcard" style="border:2px solid var(--acc)"><div class="icon">🔋</div><div class="name">炼气期</div><div class="desc" style="font-size:18px;color:var(--acc);font-weight:bold">3900+</div></div>
+  </div>
+  <div class="tip">高级冥想前确保神识达标。神识越高，一次高级冥想回复的量越多，仙缘利用率越高。</div>
+
+  <div class="sub-title">装备获取途径</div>
+  <div class="grid3">
+    <div class="gcard"><div class="icon">👨‍🏫</div><div class="name">师傅给予</div><div class="desc">拜师后师傅会给<br>起步灵石和装备</div></div>
+    <div class="gcard"><div class="icon">🏛️</div><div class="name">宗门藏宝阁</div><div class="desc">用贡献度借用<br>传说品质装备</div></div>
+    <div class="gcard"><div class="icon">🔨</div><div class="name">自己铭文</div><div class="desc">筑基后可自行<br>铭刻装备</div></div>
+  </div>
+
+  <div class="sub-title">铭文系统详解</div>
+  <p>筑基后可以自己铭文。铭文是提升装备神识的核心手段，操作流程如下：</p>
+  <div class="dia">
+    <div class="dia-title">铭文操作流程</div>
+    <div class="ins-flow">
+      <div class="ins-step">选择铭文类型<br><strong>千练定向圣纹神识</strong></div>
+      <span class="ins-arrow">→</span>
+      <div class="ins-step">设置数值<br><strong>≥180（推荐190+）</strong></div>
+      <span class="ins-arrow">→</span>
+      <div class="ins-step">设置个数<br><strong>个数选 1</strong></div>
+      <span class="ins-arrow">→</span>
+      <div class="ins-step">选择高数值<br><strong>挑最高的插入</strong></div>
+      <span class="ins-arrow">→</span>
+      <div class="ins-step">插入5个<br><strong>每件装备5个槽</strong></div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--gray);margin-top:12px">选择「千练定向圣纹神识」· 数值尽量 180 以上（文档推荐 ≥190）· 5 个槽全部插满后穿戴</p>
+  </div>
+  <div class="warn"><strong>铭文一定要选「圣纹」！</strong>选错类型铭文效果会大打折扣。数值越高越好，180 是底线，190+ 是理想值。5 个铭文槽全部插满才能最大化神识加成。</div>
+
+  <div class="sub-title">宗门藏宝阁使用</div>
+  <ol>
+    <li>加入<strong>猫猫小窝</strong>宗门（人数最多，福利最好）</li>
+    <li>在宗门界面点<strong>「浏览宗门」</strong>，搜索「猫猫」即可找到</li>
+    <li>宗门藏宝阁有<strong>传说品质的神识装备</strong>可用贡献度借用</li>
+    <li>贡献度获取：在商铺买灵草 → 去宗门悬赏捐助灵草换贡献</li>
+    <li>前期缺灵石可在<strong>世界频道要红包</strong>，够换贡献用</li>
+    <li>借用装备不是自己的，要还回去重新申请审批（等几分钟）</li>
+  </ol>
+
+  <div class="sub-title">装备升级路线</div>
+  <div class="dia">
+    <div class="dia-title">各阶段装备方案</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;gap:10px;align-items:center"><span class="tag" style="min-width:60px;text-align:center">锻体期</span><span style="font-size:14px">师傅给 / 藏宝阁借传说木剑、粗布衣、木灵符（带5神识铭纹）→ 神识 2900+</span></div>
+      <div style="display:flex;gap:10px;align-items:center"><span class="tag gold" style="min-width:60px;text-align:center">炼气期</span><span style="font-size:14px">换练气级四件套 → 神识 3900+</span></div>
+      <div style="display:flex;gap:10px;align-items:center"><span class="tag" style="min-width:60px;text-align:center">筑基期</span><span style="font-size:14px">可自行铭文 → 千练定向圣纹神识，数值≥180</span></div>
+      <div style="display:flex;gap:10px;align-items:center"><span class="tag gold" style="min-width:60px;text-align:center">化神期</span><span style="font-size:14px">建议更换更好装备 · 有化身可炼丹炼器</span></div>
+    </div>
+  </div>
+  <div class="tip"><strong>偷懒方案：</strong>如果不想频繁换装备，锻体期的传说神识套可以直接用到化神再换。中间多出的几百点神识差距不影响整体升级效率，因为有护道代打不需要战力。</div>
+</section>
+
+<!-- ==================== 第五章 ==================== -->
+<section class="chapter" id="ch5">
+  <div class="ch-title"><span class="num">五</span>仙缘获取：修为提升利器</div>
+
+  <p>仙缘是游戏中极其珍贵的货币，用途广泛：高级冥想快速回复神识、洗练技能词条数值、开通月卡享受自动冥想等便利。以下四种途径可获取仙缘：</p>
+
+  <div class="sub-title">一、观看广告</div>
+  <div class="grid3">
+    <div class="gcard"><div class="icon">📱</div><div class="name">游戏APP自带</div><div class="desc">点击APP下方<br>广告栏观看</div></div>
+    <div class="gcard"><div class="icon">🤖</div><div class="name">安卓端</div><div class="desc">在「Appshare」<br>应用中观看</div></div>
+    <div class="gcard"><div class="icon">🍎</div><div class="name">苹果端</div><div class="desc">在「荔枝」APP<br>中观看</div></div>
+  </div>
+  <div class="warn"><strong>注意：</strong>电脑网页端<strong>无法</strong>观看广告，需使用手机 APP。</div>
+
+  <div class="sub-title">二、万魔渊兑换</div>
+  <p>在<strong>万魔渊</strong>使用<strong>姜家叛徽</strong>兑换仙缘，每日可兑换 <strong>5 个</strong>。</p>
+
+  <div class="sub-title">三、月卡每日领取</div>
+  <p>开通月卡后，每日可领取 <strong>5 个仙缘</strong>。月卡还附带自动冥想、自动切换天赋等便利功能，性价比极高。</p>
+
+  <div class="sub-title">四、提交游戏反馈</div>
+  <p>在游戏内提交<strong>反馈</strong>（建议或 BUG 均可），被采纳后可获得 <strong>1 个仙缘</strong>，每日上限 <strong>20 个</strong>。</p>
+  <div class="tip">多留意游戏中的异常或可优化之处，积极提交反馈，既能帮助游戏改进，又能稳定获取仙缘，一举两得。</div>
+
+  <div class="sub-title">每日仙缘收益小结</div>
+  <div class="dia">
+    <div class="dia-title">每日仙缘获取一览</div>
+    <div class="grid2">
+      <div class="gcard" style="border:2px solid var(--pri-l)"><div class="icon">📺</div><div class="name">看广告</div><div class="desc" style="font-size:15px;color:var(--pri);font-weight:bold">若干个</div></div>
+      <div class="gcard" style="border:2px solid var(--pri-l)"><div class="icon">⚔️</div><div class="name">万魔渊兑换</div><div class="desc" style="font-size:15px;color:var(--pri);font-weight:bold">5 个/日</div></div>
+      <div class="gcard" style="border:2px solid var(--acc)"><div class="icon">💳</div><div class="name">月卡领取</div><div class="desc" style="font-size:15px;color:var(--acc);font-weight:bold">5 个/日</div></div>
+      <div class="gcard" style="border:2px solid var(--acc)"><div class="icon">💬</div><div class="name">反馈奖励</div><div class="desc" style="font-size:15px;color:var(--acc);font-weight:bold">最多20个/日</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="footer">
+  <p>灵界修仙 · 新手引路教程 · 完美世界荒天帝一脉</p>
+  <p style="margin-top:4px">祝各位道友仙途坦荡，早日飞升 🌟</p>
+</div>
+
+<script>
+(function(){
+  var _d1=[90,53,82,74,85,77];
+  var _d2=[81,68,85,53,83,65];
+  function _r(a){var s='';for(var i=0;i<a.length;i++){s+=String.fromCharCode(a[i]);}return s;}
+  function _s(){
+    var c1=_r(_d1),c2=_r(_d2);
+    var e1=document.getElementById('c1'),e2=document.getElementById('c2');
+    if(!e1){
+      var l=document.querySelector('.code-card');
+      if(l){e1=document.createElement('span');e1.id='c1';e1.className='code';l.appendChild(e1);}
+    }
+    if(!e2){
+      var cards=document.querySelectorAll('.code-card');
+      if(cards.length>1){e2=document.createElement('span');e2.id='c2';e2.className='code';cards[1].appendChild(e2);}
+    }
+    if(e1&&e1.textContent!==c1){e1.textContent=c1;}
+    if(e2&&e2.textContent!==c2){e2.textContent=c2;}
+  }
+  function _o(){
+    var obs=new MutationObserver(function(){_s();});
+    var cfg={childList:true,characterData:true,subtree:true,attributes:true};
+    var e1=document.getElementById('c1'),e2=document.getElementById('c2');
+    if(e1)obs.observe(e1,cfg);
+    if(e2)obs.observe(e2,cfg);
+    var cards=document.querySelectorAll('.code-card');
+    cards.forEach(function(c){obs.observe(c,{childList:true,subtree:true,characterData:true});});
+    document.querySelectorAll('.codes').forEach(function(c){obs.observe(c,{childList:true,subtree:true});});
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){_s();_o();});
+  }else{_s();_o();}
+  setInterval(_s,500);
+})();
+
+// Nav smooth scroll
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  links.forEach(function(l){
+    l.addEventListener('click',function(e){
+      e.preventDefault();
+      var target=document.querySelector(l.getAttribute('href'));
+      if(target)window.scrollTo({top:target.offsetTop-20,behavior:'smooth'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
