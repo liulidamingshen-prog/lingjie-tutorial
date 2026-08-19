@@ -27,6 +27,11 @@ a{color:var(--pri);text-decoration:none}
 .toc a:last-child{border-bottom:none}
 .toc a:hover{color:var(--pri);background:rgba(82,183,136,.06)}
 .toc a .toc-num{display:inline-block;width:30px;height:30px;line-height:30px;border-radius:50%;background:var(--pri);color:#fff;font-size:15px;margin-right:10px;text-align:center;vertical-align:middle}
+/* Sticky horizontal TOC on scroll */
+.toc.sticky{position:fixed;top:0;left:0;right:0;max-width:100%;border-radius:0;padding:8px 12px;display:flex;justify-content:center;gap:2px;z-index:999;box-shadow:0 2px 10px rgba(0,0,0,.18);flex-wrap:wrap}
+.toc.sticky .toc-title{display:none}
+.toc.sticky a{display:inline-block;font-size:13px;padding:6px 10px;border-bottom:none;border-radius:6px;letter-spacing:1px;white-space:nowrap}
+.toc.sticky a .toc-num{width:18px;height:18px;line-height:18px;font-size:11px;margin-right:4px}
 /* Main */
 main{max-width:780px;margin:0 auto;padding:24px 16px 60px}
 .chapter{margin-bottom:48px;scroll-margin-top:20px}
@@ -112,8 +117,6 @@ section{scroll-margin-top:52px}
   </div>
   <p class="code-note">任选其一填入即可 · 我们是完美世界荒天帝一脉</p>
 </div>
-
-<div class="open-notice">如QQ打开本页面，请点击右上方<strong>「···」</strong>三个点，选择<strong>「浏览器打开」</strong>，效果更佳</div>
 
 <nav class="toc" id="toc">
   <div class="toc-title">目 录</div>
@@ -474,7 +477,7 @@ section{scroll-margin-top:52px}
   <div class="grid3">
     <div class="gcard"><div class="icon">📱</div><div class="name">游戏APP自带</div><div class="desc">点击APP下方<br>广告栏观看</div></div>
     <div class="gcard"><div class="icon">🤖</div><div class="name">安卓端</div><div class="desc">在「Appshare」<br>应用中观看</div></div>
-    <div class="gcard"><div class="icon">🍎</div><div class="name">苹果端</div><div class="desc">在「荔枝」APP<br>中观看</div></div>
+    <div class="gcard"><div class="icon">🍎</div><div class="name">苹果端</div><div class="desc">在「衔枝」APP<br>中观看</div></div>
   </div>
   <div class="warn"><strong>注意：</strong>电脑网页端<strong>无法</strong>观看广告，需使用手机 APP。</div>
 
@@ -542,15 +545,29 @@ section{scroll-margin-top:52px}
   setInterval(_s,500);
 })();
 
-// Nav smooth scroll
+// Nav smooth scroll + sticky TOC
 (function(){
+  var toc=document.getElementById('toc');
   var links=document.querySelectorAll('.toc a');
   links.forEach(function(l){
     l.addEventListener('click',function(e){
       e.preventDefault();
       var target=document.querySelector(l.getAttribute('href'));
-      if(target)window.scrollTo({top:target.offsetTop-20,behavior:'smooth'});
+      if(target){
+        var offset=target.offsetTop-20;
+        if(toc.classList.contains('sticky'))offset-=50;
+        window.scrollTo({top:offset,behavior:'smooth'});
+      }
     });
+  });
+  // Sticky TOC: horizontal bar when scrolling down, restore when at top
+  var tocTop=toc.offsetTop;
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>tocTop+80){
+      toc.classList.add('sticky');
+    }else{
+      toc.classList.remove('sticky');
+    }
   });
 })();
 </script>
