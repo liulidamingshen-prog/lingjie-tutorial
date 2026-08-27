@@ -16,7 +16,13 @@ a{color:var(--pri);text-decoration:none}
 .codes{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;margin-bottom:8px}
 .code-card{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:8px 16px;font-size:15px;backdrop-filter:blur(4px)}
 .code-card .label{opacity:.85}
-.code-card .code{font-weight:bold;font-size:17px;letter-spacing:2px;color:#fde68a;font-family:monospace}
+.code-card .code{font-weight:bold;font-size:17px;letter-spacing:2px;color:#fde68a;font-family:monospace;cursor:pointer;position:relative;user-select:none;-webkit-user-select:none;transition:.2s;padding:2px 6px;border-radius:4px}
+.code-card .code:hover{background:rgba(255,255,255,.2)}
+.code-card .code:active{background:rgba(255,255,255,.35)}
+.code-card .code::after{content:'📋';font-size:12px;margin-left:4px;opacity:.6}
+.code-hint{font-size:12px;opacity:.65;text-align:center;margin-top:4px}
+.copy-toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(46,125,50,.95);color:#fff;padding:12px 28px;border-radius:10px;font-size:16px;font-weight:bold;z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.copy-toast.show{opacity:1}
 .code-note{font-size:13px;opacity:.8;position:relative}
 .open-notice{background:#fff8ec;border:1px solid var(--acc-l);border-radius:8px;padding:10px 16px;margin:20px auto;max-width:560px;text-align:center;font-size:14px;color:var(--acc)}
 .open-notice strong{color:var(--red)}
@@ -117,7 +123,9 @@ section{scroll-margin-top:52px}
     <div class="code-card"><span class="label">【清漪澄】接引码：</span><span class="code" id="c2">QDU5SA</span></div>
   </div>
   <p class="code-note">任选其一填入即可 · 我们是完美世界荒天帝一脉</p>
+  <p class="code-hint">点击接引码即可复制</p>
 </div>
+<div class="copy-toast" id="copyToast">已复制</div>
 
 <nav class="toc" id="toc">
   <div class="toc-title">目 录</div>
@@ -540,6 +548,49 @@ section{scroll-margin-top:52px}
     document.addEventListener('DOMContentLoaded',function(){_s();_o();});
   }else{_s();_o();}
   setInterval(_s,500);
+})();
+
+// Click to copy referral codes
+(function(){
+  var toast=document.getElementById('copyToast');
+  var toastTimer=null;
+  function showToast(){
+    toast.classList.add('show');
+    if(toastTimer)clearTimeout(toastTimer);
+    toastTimer=setTimeout(function(){toast.classList.remove('show');},1500);
+  }
+  function copyText(text){
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(showToast).catch(function(){fallbackCopy(text);});
+    }else{
+      fallbackCopy(text);
+    }
+  }
+  function fallbackCopy(text){
+    var ta=document.createElement('textarea');
+    ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');showToast();}catch(e){}
+    document.body.removeChild(ta);
+  }
+  function bindCopy(){
+    document.querySelectorAll('.code-card .code').forEach(function(el){
+      if(el._bound)return;el._bound=true;
+      el.addEventListener('click',function(e){
+        e.preventDefault();e.stopPropagation();
+        copyText(el.textContent.trim());
+      });
+      el.addEventListener('touchend',function(e){
+        e.preventDefault();e.stopPropagation();
+        copyText(el.textContent.trim());
+      });
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',bindCopy);
+  }else{bindCopy();}
+  setTimeout(bindCopy,300);
+  setTimeout(bindCopy,1000);
 })();
 
 // Nav smooth scroll + sticky bar
